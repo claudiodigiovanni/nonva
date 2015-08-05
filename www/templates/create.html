@@ -1,0 +1,41 @@
+<ion-view view-title="Nuova Segnalazione">
+    <ion-content>
+        <form name="myForm">
+
+            <label class="item item-input">
+                <span class="input-label">Descrizione</span>
+                <input type="text" name="descrizione"
+                       ng-model="vm.descrizione"
+                       ng-minlength="5"
+                       ng-maxlength="10"
+                       required>
+                <div ng-messages="myForm.descrizione.$error" ng-if="myForm.descrizione.$touched">
+                    <p ng-message="minlength">Your name is too short.</p>
+                    <p ng-message="maxlength">Your name is too long.</p>
+                    <p ng-message="required">Your name is required.</p>
+                </div>
+            </label>
+
+            <label class="item item-input">
+                <span class="input-label">Ufficio</span>
+                <input type="text" name="ufficio"
+                       ng-model="vm.ufficio"
+                       ng-minlength="5"
+                       ng-maxlength="10"
+                       required>
+                <div ng-messages="myForm.ufficio.$error" ng-if="myForm.ufficio.$touched">
+                    <p ng-message="minlength">Your name is too short.</p>
+                    <p ng-message="maxlength">Your name is too long.</p>
+                    <p ng-message="required">Your name is required.</p>
+                </div>
+            </label>
+
+
+
+
+            <button class="button button-stable button-block" ng-click="vm.submit()">Invia....</button>
+
+        </form>
+    </ion-content>
+</ion-view>
+

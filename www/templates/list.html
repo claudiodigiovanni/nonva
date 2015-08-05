@@ -1,0 +1,14 @@
+<ion-view view-title="Lista..">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="s in vm.segnalazioni" href="#/app/list/{{s._id}}">
+        {{s.descrizione}} - {{s.ufficio}}
+          <ion-option-button class="button-assertive" ng-click="vm.remove(s)">
+              Delete
+          </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+
+

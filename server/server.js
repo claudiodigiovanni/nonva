@@ -30,7 +30,7 @@ Ufficio.remove({}, function(err) {
 });
 Segnalazione.remove({}, function(err) {
     console.log('collection removed')
-});*/
+});
 
 console.log('****************************');
 
@@ -79,8 +79,27 @@ Comune.find({}).exec(function(err,data){
 });
 
 
+ */
 
 
+
+var comune1 = new Comune({descrizione:'descrizioneComune1'});
+comune1.save(function(err){
+
+    var ufficio1 = new Ufficio({descrizione: 'descriUfficio1', comune:comune1._id});
+    ufficio1.save(function(err){
+    });
+
+});
+
+var comune2 = new Comune({descrizione:'descrizioneComune2'});
+comune2.save(function(err){
+
+    var ufficio2 = new Ufficio({descrizione: 'descriUfficio2', comune:comune2._id});
+    ufficio2.save(function(err){
+    });
+
+});
 //**********************
 
 

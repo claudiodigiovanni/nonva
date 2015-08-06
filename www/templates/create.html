@@ -2,33 +2,52 @@
     <ion-content>
         <form name="myForm">
 
-            <label class="item item-input">
-                <span class="input-label">Descrizione</span>
-                <input type="text" name="descrizione"
-                       ng-model="vm.descrizione"
-                       ng-minlength="5"
-                       ng-maxlength="10"
-                       required>
-                <div ng-messages="myForm.descrizione.$error" ng-if="myForm.descrizione.$touched">
-                    <p ng-message="minlength">Your name is too short.</p>
-                    <p ng-message="maxlength">Your name is too long.</p>
-                    <p ng-message="required">Your name is required.</p>
-                </div>
-            </label>
+            <div class="list">
+                <label class="item item-input">
+                    <textarea placeholder="Descrizione" name="descrizione"
+                              ng-model="vm.descrizione"
+                              ng-minlength="5"
+                              ng-maxlength="10"
+                              required></textarea>
+                    <div ng-messages="myForm.descrizione.$error" ng-if="myForm.descrizione.$touched">
+                        <p ng-message="minlength">Your name is too short.</p>
+                        <p ng-message="maxlength">Your name is too long.</p>
+                        <p ng-message="required">Your name is required.</p>
+                    </div>
+                </label>
 
-            <label class="item item-input">
-                <span class="input-label">Ufficio</span>
-                <input type="text" name="ufficio"
-                       ng-model="vm.ufficio"
-                       ng-minlength="5"
-                       ng-maxlength="10"
-                       required>
-                <div ng-messages="myForm.ufficio.$error" ng-if="myForm.ufficio.$touched">
-                    <p ng-message="minlength">Your name is too short.</p>
-                    <p ng-message="maxlength">Your name is too long.</p>
-                    <p ng-message="required">Your name is required.</p>
-                </div>
-            </label>
+                <br><br>
+
+                    <ui-select ng-model="vm.ufficio" theme="bootstrap" style="min-width: 400px;">
+                        <ui-select-match placeholder="Select an office in the list or search his name/age...">{{$select.selected.descrizione}}</ui-select-match>
+                        <ui-select-choices repeat="u in vm.uffici | filter: $select.search" track by u._id
+                                           refresh="vm.refreshUffici($select.search)"
+                                           refresh-delay="0">
+                            <div ng-bind-html="u.descrizione | highlight: $select.search"></div>
+                            <small>
+                                via: {{u.via}}
+                                comune: {{u.comune}}
+                            </small>
+                        </ui-select-choices>
+                    </ui-select>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+            SEL:{{vm.ufficio}}
+
+            <br>
+
+
+
 
 
 

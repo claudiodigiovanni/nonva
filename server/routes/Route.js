@@ -23,6 +23,27 @@ router.get('/segnalazioni', function (req, res){
             exec(callback);
 });
 
+router.get('/segnalazioni/uffici', function (req, res){
+
+    var callback = function (err, uffici) {
+        if (!err) {
+            console.log(uffici);
+            return res.send(uffici);
+        } else {
+            return console.log(err);
+        }
+    }
+    console.log(req.query.name);
+    var regex = new RegExp(req.query.name, "i")
+    if (!req.query.name || req.query.name.length <=3)
+        return Ufficio.find({descrizione: 'xxxx'}).
+            populate('comune').
+            exec(callback);;
+    return Ufficio.find({descrizione: regex}).
+        populate('comune').
+        exec(callback);
+});
+
 router.post('/segnalazioni', function (req, res){
     var segnalazione  = new Segnalazione({
 

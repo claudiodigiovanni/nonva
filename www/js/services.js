@@ -10,7 +10,7 @@ function Segnalazioni ($resource) {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
-    var segnalazioni = $resource("http://localhost:3000/api/post/:_id", {_id:'@_id'});
+    var segnalazioni = $resource("http://localhost:3000/api/segnalazioni/:_id", {_id:'@_id'});
     return segnalazioni;
 
 }

@@ -3,8 +3,8 @@ angular.module('starter.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
+  // when they are recreated or on app start, instead of every pcomune change.
+  // To listen for when this pcomune is active (for example, to refresh data),
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
@@ -87,7 +87,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('CreateCtrl', function($scope, $stateParams,$rootScope, Segnalazioni, $state) {
+.controller('CreateCtrl', function($scope, $stateParams,$rootScope, Segnalazioni, $state, $http) {
 
     var vm = this;
     vm.submit = function(){
@@ -98,7 +98,30 @@ angular.module('starter.controllers', [])
             console.log('saved.......');
         });
         $state.go('app.list');
+
+
     }
+
+       
+
+
+        vm.refreshUffici = function(partial) {
+            if (!partial){
+                vm.uffici = {};
+                return;
+            }
+
+            var params = {name: partial};
+            return $http.get(
+                'http://localhost:3000/api/segnalazioni/uffici',
+                {params: params}
+            ).then(function(response) {
+                    vm.uffici = response.data
+                    console.log(vm.uffici);
+                });
+        };
+
+
 
 
 });

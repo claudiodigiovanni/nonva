@@ -79,7 +79,7 @@ Comune.find({}).exec(function(err,data){
 });
 
 
- */
+
 
 
 
@@ -100,6 +100,19 @@ comune2.save(function(err){
     });
 
 });
+
+ var comune1 = new Comune({descrizione:'comune1'});
+ comune1.save(function(err){
+
+
+ });
+
+ var comune2 = new Comune({descrizione:'comune2'});
+ comune2.save(function(err){
+
+
+ });
+ */
 //**********************
 
 

@@ -2,7 +2,10 @@
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="s in vm.segnalazioni" href="#/app/list/{{s._id}}">
-        {{s.descrizione}} - {{s.ufficio}}
+        {{s.descrizione}} <br>
+          <small>
+              {{s.ufficio.descrizione}} - {{s.ufficio.comune.descrizione}}
+          </small>
           <ion-option-button class="button-assertive" ng-click="vm.remove(s)">
               Delete
           </ion-option-button>

@@ -1,5 +1,19 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <h1>Browse</h1>
+<ion-view view-title="Cerca Segnalazione (1 di 2)">
+  <ion-content><br>
+    <label class="item item-input">
+      <input type="text" ng-keyup="refreshUffici()" ng-model="segnalazione.ufficio.descrizione" placeholder="Scrivi il nome dell'ufficio....">
+    </label>
+    <ion-list>
+
+      <ion-item ng-repeat="u in uffici" class="item-button-right">
+        {{u.descrizione}} <br>
+        <small>
+          {{u.comune.descrizione}} - {{u.via}}
+        </small>
+        <button class="button button-outline button-positive" ng-click="selectOffice(u)">
+          Seleziona
+        </button>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

@@ -1,0 +1,24 @@
+
+    <ion-header-bar>
+        <h1 class="title">Crea Ufficio</h1>
+    </ion-header-bar>
+    <ion-content>
+
+        <div class="list">
+            <label class="item item-input">
+                <input type="text" placeholder="Descrizione" ng-model="ufficio.descrizione">
+            </label>
+            <label class="item item-input">
+                <input type="text" placeholder="Via" ng-model="ufficio.via">
+            </label>
+            <label class="item item-input">
+                <textarea placeholder="Comune" ng-model="ufficio.comune.descrizione"></textarea>
+            </label>
+            <button class="button button-stable button-block" ng-click="createOffice()">Invia....</button>
+
+        </div>
+        <toaster-container></toaster-container>
+
+
+
+    </ion-content>

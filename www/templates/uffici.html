@@ -1,0 +1,26 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Uffici</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeUffici()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+                <label class="item item-input">
+                    <input type="text" ng-keyup="refreshUffici()" ng-model="segnalazione.ufficio.descrizione" placeholder="Scrivi il nome dell'ufficio....">
+                </label>
+                <ion-list>
+
+                    <ion-item ng-repeat="u in uffici" class="item-button-right">
+                        {{u.descrizione}} <br>
+                        <small>
+                            {{u.comune.descrizione}} - {{u.via}}
+                        </small>
+                        <button class="button button-outline button-positive" ng-click="selectOffice(u)">
+                            Seleziona
+                        </button>
+                    </ion-item>
+                </ion-list>
+                <!--xx -->
+    </ion-content>
+</ion-modal-view>

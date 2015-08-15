@@ -11,15 +11,18 @@ var User = require('../models/User');
 router.get('/segnalazioni', function (req, res){
 
     var callback = function (err, segnalazioni) {
+        console.log("****************LISTA SEGNALAZIONI**************************" + segnalazioni.length);
         if (!err) {
-            return res.send(segnalazioni);
-        } else {
+            Comune.populate(segnalazioni,{path:'ufficio.comune'},function(err,docs) {
+                return res.send(docs);
+            })
+        }
+         else {
             return console.log(err);
         }
     }
    return Segnalazione.find().
             populate('ufficio').
-            populate('ufficio.comune').
             exec(callback);
 });
 
@@ -27,13 +30,13 @@ router.get('/segnalazioni/uffici', function (req, res){
 
     var callback = function (err, uffici) {
         if (!err) {
-            console.log(uffici);
+            //console.log(uffici);
             return res.send(uffici);
         } else {
             return console.log(err);
         }
     }
-    console.log(req.query.name);
+    //console.log(req.query.name);
     var regex = new RegExp(req.query.name, "i")
     if (!req.query.name || req.query.name.length <=3)
         return Ufficio.find({descrizione: 'xxxx'}).
@@ -47,16 +50,19 @@ router.get('/segnalazioni/uffici', function (req, res){
 router.post('/segnalazioni', function (req, res){
     var segnalazione  = new Segnalazione({
 
-        descrizione: req.body.descrizione
+        descrizione: req.body.descrizione,
+        ufficio: req.body.ufficio
     });
     segnalazione.save(function (err) {
         if (!err) {
-            return console.log("created");
+            console.log("created");
+            console.log(segnalazione);
+            return res.send(segnalazione);
         } else {
             return console.log("errore...." + err);
         }
     });
-    return res.send(segnalazione);
+
 });
 
 router.get('/segnalazioni/:id', function (req, res){
@@ -68,6 +74,29 @@ router.get('/segnalazioni/:id', function (req, res){
             return console.log(err);
         }
     });
+});
+
+router.post('/segnalazioni/ufficio', function (req, res){
+    Comune.findOne({descrizione:req.body.params.ufficio.comune.descrizione},function(err,comune){
+        if (err || comune == null){
+            console.log('Comune non trovato!');
+            return res.sendStatus(500);
+        }
+        console.log('Comune ok!');
+        console.log(comune);
+        var ufficio = new Ufficio({descrizione:req.body.params.ufficio.descrizione, via: req.body.params.ufficio.via, comune: comune._id});
+        ufficio.save(function(err){
+            if (!err) {
+                console.log("Ufficio created");
+
+                return res.send(ufficio);
+            } else {
+                return console.log("errore...." + err);
+            }
+
+        })
+    })
+    return console.log(req.body);
 });
 
 router.post('/segnalazioni/:id', function (req, res){

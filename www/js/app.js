@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngMessages','ui.select', 'ngSanitize','starter.controllers','starter.services'])
+angular.module('starter', ['ionic', 'ngMessages','toaster', 'ngAnimate','starter.controllers','starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -28,7 +28,7 @@ angular.module('starter', ['ionic', 'ngMessages','ui.select', 'ngSanitize','star
 
     .state('app', {
     url: '/app',
-    abstract: true,
+    abstract: true,  B
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
@@ -47,7 +47,7 @@ angular.module('starter', ['ionic', 'ngMessages','ui.select', 'ngSanitize','star
       views: {
         'menuContent': {
           templateUrl: 'templates/create.html',
-          controller: 'CreateCtrl as vm'
+          controller: 'CreateCtrl'
         }
       }
     })
@@ -69,7 +69,19 @@ angular.module('starter', ['ionic', 'ngMessages','ui.select', 'ngSanitize','star
         controller: 'EditCtrl as vm'
       }
     }
-  });
+  })
+
+  .state('app.createOffice', {
+    url: '/createOffice',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/createOffice.html',
+        controller: 'createOfficeCtrl as vm'
+      }
+    }
+  })
+
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/list');
 });

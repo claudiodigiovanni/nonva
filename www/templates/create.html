@@ -1,11 +1,10 @@
 <ion-view view-title="Nuova Segnalazione">
-    <ion-content>
+    <ion-content><br>
         <form name="myForm">
-
             <div class="list">
                 <label class="item item-input">
-                    <textarea placeholder="Descrizione" name="descrizione"
-                              ng-model="vm.descrizione"
+                    <textarea placeholder="Descrizione"
+                              ng-model="segnalazione.descrizione"
                               ng-minlength="5"
                               ng-maxlength="10"
                               required></textarea>
@@ -15,46 +14,30 @@
                         <p ng-message="required">Your name is required.</p>
                     </div>
                 </label>
-
-                <br><br>
-
-                    <ui-select ng-model="vm.ufficio" theme="bootstrap" style="min-width: 400px;">
-                        <ui-select-match placeholder="Select an office in the list or search his name/age...">{{$select.selected.descrizione}}</ui-select-match>
-                        <ui-select-choices repeat="u in vm.uffici | filter: $select.search" track by u._id
-                                           refresh="vm.refreshUffici($select.search)"
-                                           refresh-delay="0">
-                            <div ng-bind-html="u.descrizione | highlight: $select.search"></div>
-                            <small>
-                                via: {{u.via}}
-                                comune: {{u.comune}}
-                            </small>
-                        </ui-select-choices>
-                    </ui-select>
-
-
             </div>
-
-
-
-
-
-
-
-
-
-            SEL:{{vm.ufficio}}
-
+            <button class="button button-outline button-positive" ng-click="chooseOffice()">
+                Seleziona l'ufficio
+            </button>
+            <br><br>
+            <div class="list" ng-show="segnalazione.ufficio.descrizione">
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-settings"></i>
+                    {{segnalazione.ufficio.descrizione}}
+                </a>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-pinpoint"></i>
+                    {{segnalazione.ufficio.via}}
+                </a>
+                <a class="item item-icon-left" href="#">
+                    <i class="icon ion-map"></i>
+                    {{segnalazione.ufficio.comune.descrizione}}
+                </a>
+            </div>
             <br>
 
+            <button class="button button-stable button-block" ng-click="submit()">Invia....</button>
+            </form>
 
-
-
-
-
-
-            <button class="button button-stable button-block" ng-click="vm.submit()">Invia....</button>
-
-        </form>
     </ion-content>
 </ion-view>
 
